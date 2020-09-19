@@ -1,0 +1,372 @@
+{
+  "states": {
+    "initial": {
+      "data": {
+        "type": "init",
+        "id": "initial",
+        "onenter": [],
+        "onexit": []
+      }
+    },
+    "final": {
+      "data": {
+        "type": "final",
+        "id": "final",
+        "onenter": [],
+        "onexit": []
+      }
+    },
+    "k77vtpj6": {
+      "data": {
+        "type": "state",
+        "id": "k77vtpj6",
+        "name": "Начало",
+        "description": "",
+        "onenter": [
+          {
+            "id": "led-off",
+            "name": "Выключить LED",
+            "args": {}
+          },
+          {
+            "id": "ric-geo.rightech/watch-geofence",
+            "name": "Начать отслеживание геозоны",
+            "args": {
+              "geofences_ids": {
+                "id": "geofences_ids",
+                "value": [
+                  "5e5a9d5972f5a41b53666a33"
+                ]
+              }
+            }
+          }
+        ],
+        "onexit": []
+      }
+    },
+    "k77vuq58": {
+      "data": {
+        "type": "state",
+        "id": "k77vuq58",
+        "name": "Зерновоз прибыл в зону погрузки",
+        "description": "",
+        "onenter": [
+          {
+            "id": "send-push-message",
+            "name": "Сообщение оператору",
+            "args": {
+              "importance": {
+                "id": "importance",
+                "dataType": "type:option, options:[information,important,critical]",
+                "value": "information"
+              },
+              "message-body": {
+                "id": "message-body",
+                "dataType": "text",
+                "value": "Зерновоз N прибыл на станцию измерения качества, объема и забора зерна"
+              }
+            }
+          },
+          {
+            "id": "led-on",
+            "name": "Включить LED",
+            "args": {}
+          },
+          {
+            "id": "change-value",
+            "name": "Изменить значение",
+            "args": {
+              "read": {
+                "id": "read",
+                "value": {
+                  "source": "none"
+                }
+              },
+              "write": {
+                "id": "write",
+                "value": {
+                  "source": "state",
+                  "path": "status_car"
+                }
+              }
+            }
+          }
+        ],
+        "onexit": [
+          {
+            "id": "ask_temp_hum",
+            "name": "Запросить температуру и влажность",
+            "args": {}
+          }
+        ]
+      }
+    },
+    "k77w9njv": {
+      "data": {
+        "type": "state",
+        "id": "k77w9njv",
+        "name": "Разгрузка зерна",
+        "description": "",
+        "onenter": [
+          {
+            "id": "send-push-message",
+            "name": "Сообщение оператору",
+            "args": {
+              "importance": {
+                "id": "importance",
+                "dataType": "type:option, options:[information,important,critical]",
+                "value": "information"
+              },
+              "message-body": {
+                "id": "message-body",
+                "dataType": "text",
+                "value": "Зерно пригодно"
+              }
+            }
+          }
+        ],
+        "onexit": [
+          {
+            "id": "change-value",
+            "name": "Изменить значение",
+            "args": {
+              "write": {
+                "id": "write",
+                "value": {
+                  "source": "state",
+                  "path": "seed_status"
+                }
+              },
+              "read": {
+                "id": "read",
+                "value": {
+                  "source": "none"
+                }
+              },
+              "expr": {
+                "id": "expr",
+                "value": "false"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "k77wgbis": {
+      "data": {
+        "type": "state",
+        "id": "k77wgbis",
+        "name": "Зерно не пригодно",
+        "description": "",
+        "onenter": [
+          {
+            "id": "send-push-message",
+            "name": "Сообщение оператору",
+            "args": {
+              "importance": {
+                "id": "importance",
+                "dataType": "type:option, options:[information,important,critical]",
+                "value": "information"
+              },
+              "message-body": {
+                "id": "message-body",
+                "dataType": "text",
+                "value": "Зерно не пригодно"
+              }
+            }
+          }
+        ],
+        "onexit": []
+      }
+    },
+    "k77wkt5k": {
+      "data": {
+        "type": "state",
+        "id": "k77wkt5k",
+        "name": "Зерновоз разгружен",
+        "description": "",
+        "onenter": [
+          {
+            "id": "change-value",
+            "name": "Изменить значение",
+            "args": {}
+          }
+        ],
+        "onexit": []
+      }
+    },
+    "k77wq4a6": {
+      "data": {
+        "type": "state",
+        "id": "k77wq4a6",
+        "name": "Новое состояние",
+        "description": "",
+        "onenter": [],
+        "onexit": []
+      }
+    }
+  },
+  "transitions": {
+    "k77vttwk": {
+      "data": {
+        "owner": {
+          "id": "initial"
+        },
+        "target": {
+          "id": "k77vtpj6"
+        },
+        "id": "k77vttwk",
+        "blockKey": "cb-k77vttwk",
+        "event": "init",
+        "name": "Инициализация логики",
+        "description": "Событие возникающее при запуске интерпретации модели логики",
+        "autoDescription": false,
+        "eventParameters": {}
+      },
+      "version": 3
+    },
+    "k77vuv0h": {
+      "data": {
+        "owner": {
+          "id": "k77vtpj6"
+        },
+        "target": {
+          "id": "k77vuq58"
+        },
+        "id": "k77vuv0h",
+        "blockKey": "cb-k77vuv0h",
+        "event": "ric-geo.rightech/geofence-enter",
+        "name": "Вход в геозону",
+        "eventParameters": {
+          "ric-geo.rightech/geofence-enter.geofence": {
+            "id": "ric-geo.rightech/geofence-enter.geofence",
+            "active": true,
+            "type": "argument",
+            "source": "config",
+            "dataType": "string",
+            "name": "geofence",
+            "_isBase": true
+          }
+        },
+        "condition": "{\"0\":{\"0\":{\"data\":{\"type\":\"parametr\",\"arg\":\"movement\",\"source\":\"state\",\"identifier\":\"object\"},\"type\":\"parametr\"},\"1\":{\"data\":{\"arg\":\"true\",\"type\":\"value\"},\"type\":\"parametr\"},\"data\":{\"type\":\"equal\"},\"type\":\"condition\"}}",
+        "userCode": "object[\"state\"][\"movement\"] == true",
+        "autoDescription": true
+      },
+      "version": 3
+    },
+    "k77wasbs": {
+      "data": {
+        "owner": {
+          "id": "k77vuq58"
+        },
+        "target": {
+          "id": "k77w9njv"
+        },
+        "id": "k77wasbs",
+        "blockKey": "cb-k77wasbs",
+        "event": "es-recive-device-data",
+        "name": "Зерно пригодно",
+        "eventParameters": {},
+        "autoDescription": true,
+        "condition": "{\"0\":{\"0\":{\"data\":{\"type\":\"parametr\",\"arg\":\"seed_humidity\",\"source\":\"state\",\"identifier\":\"object\"},\"type\":\"parametr\"},\"1\":{\"data\":{\"arg\":\"0.17\",\"type\":\"value\"},\"type\":\"parametr\"},\"data\":{\"type\":\"less\"},\"type\":\"condition\"}}",
+        "userCode": "object[\"state\"][\"seed_humidity\"] < 0.17"
+      },
+      "version": 3
+    },
+    "k77winj1": {
+      "data": {
+        "owner": {
+          "id": "k77vuq58"
+        },
+        "target": {
+          "id": "k77wgbis"
+        },
+        "id": "k77winj1",
+        "blockKey": "cb-k77winj1",
+        "event": "es-recive-device-data",
+        "name": "Зерно не пригодно",
+        "eventParameters": {},
+        "condition": "{\"0\":{\"0\":{\"data\":{\"type\":\"parametr\",\"arg\":\"seed_humidity\",\"source\":\"state\",\"identifier\":\"object\"},\"type\":\"parametr\"},\"1\":{\"data\":{\"arg\":\"0.17\",\"type\":\"value\"},\"type\":\"parametr\"},\"data\":{\"type\":\"more-equal\"},\"type\":\"condition\"}}",
+        "userCode": "object[\"state\"][\"seed_humidity\"] >= 0.17",
+        "autoDescription": true
+      },
+      "version": 3
+    },
+    "k77wlmps": {
+      "data": {
+        "owner": {
+          "id": "k77w9njv"
+        },
+        "target": {
+          "id": "k77wkt5k"
+        },
+        "id": "k77wlmps",
+        "blockKey": "cb-k77wlmps",
+        "event": "es-recive-device-data",
+        "name": "Зерновоз разгружен",
+        "eventParameters": {},
+        "condition": "{\"0\":{\"0\":{\"data\":{\"type\":\"parametr\",\"arg\":\"seed_hight\",\"source\":\"state\",\"identifier\":\"object\"},\"type\":\"parametr\"},\"1\":{\"data\":{\"arg\":\"3\",\"type\":\"value\"},\"type\":\"parametr\"},\"data\":{\"type\":\"less\"},\"type\":\"condition\"}}",
+        "userCode": "object[\"state\"][\"seed_hight\"] < 3",
+        "autoDescription": true
+      },
+      "version": 3
+    },
+    "k77wquyv": {
+      "data": {
+        "owner": {
+          "id": "k77wgbis"
+        },
+        "target": {
+          "id": "k77wq4a6"
+        },
+        "id": "k77wquyv",
+        "blockKey": "cb-k77wquyv",
+        "event": "ric-geo.rightech/geofence-leave",
+        "name": "Выход из геозоны",
+        "eventParameters": {
+          "ric-geo.rightech/geofence-leave.geofence": {
+            "id": "ric-geo.rightech/geofence-leave.geofence",
+            "active": true,
+            "type": "argument",
+            "source": "config",
+            "dataType": "string",
+            "name": "geofence",
+            "_isBase": true
+          }
+        },
+        "autoDescription": true
+      },
+      "version": 3
+    },
+    "k77wsym9": {
+      "data": {
+        "owner": {
+          "id": "k77wkt5k"
+        },
+        "target": {
+          "id": "k77wq4a6"
+        },
+        "id": "k77wsym9",
+        "blockKey": "cb-k77wsym9",
+        "autoDescription": true,
+        "eventParameters": []
+      },
+      "version": 3
+    },
+    "k77wrt5a": {
+      "data": {
+        "owner": {
+          "id": "k77wkt5k"
+        },
+        "target": {
+          "id": "k77wq4a6"
+        },
+        "id": "k77wrt5a",
+        "blockKey": "cb-k77wrt5a",
+        "autoDescription": true,
+        "eventParameters": []
+      },
+      "version": 3
+    }
+  }
+}

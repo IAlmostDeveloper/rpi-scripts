@@ -1,0 +1,539 @@
+{
+  "id": "root",
+  "name": "MQTT",
+  "active": true,
+  "type": "subsystem",
+  "children": [
+    {
+      "id": "external-software-modules",
+      "active": true,
+      "copy": true,
+      "type": "subsystem",
+      "children": [],
+      "name": "External software modules"
+    },
+    {
+      "id": "params",
+      "name": "Params",
+      "active": true,
+      "type": "subsystem",
+      "children": [
+        {
+          "id": "server-info",
+          "name": "Server information",
+          "active": true,
+          "type": "subsystem",
+          "children": [
+            {
+              "id": "online",
+              "name": "Online",
+              "active": true,
+              "type": "argument",
+              "source": "state",
+              "dataType": "boolean",
+              "reference": "online"
+            },
+            {
+              "id": "_ts",
+              "name": "Time",
+              "active": true,
+              "type": "argument",
+              "source": "state",
+              "dataType": "number",
+              "unit": "duration-microsecond",
+              "reference": "_ts",
+              "factor": 1,
+              "linear": true
+            }
+          ]
+        },
+        {
+          "id": "temperature",
+          "name": "Температура",
+          "active": true,
+          "type": "argument",
+          "source": "state",
+          "dataType": "number",
+          "unit": "temperature-celsius",
+          "reference": "base/state/temperature",
+          "display": {
+            "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" x=\"0px\" y=\"0px\"\nviewBox=\"0 0 16 16\"\n><g id=\"surface1\"><path style=\" \" d=\"M 7.511719 1 C 6.140625 1 5.011719 2.128906 5.011719 3.5 L 5.011719 9.121094 C 4.414063 9.746094 4 10.5625 4 11.5 C 4 13.425781 5.574219 15 7.5 15 C 9.425781 15 11 13.425781 11 11.5 C 11 10.574219 10.597656 9.765625 10.011719 9.140625 L 10.011719 3.5 C 10.011719 2.128906 8.882813 1 7.511719 1 Z M 7.511719 2 C 8.339844 2 9.011719 2.671875 9.011719 3.5 L 9.011719 4 L 7 4 L 7 5 L 9.011719 5 L 9.011719 6 L 7 6 L 7 7 L 9.011719 7 L 9.011719 8 L 7 8 L 7 9 L 9.011719 9 L 9.011719 9.289063 C 9.011719 9.429688 9.070313 9.5625 9.175781 9.65625 C 9.683594 10.117188 10 10.765625 10 11.5 C 10 12.886719 8.886719 14 7.5 14 C 6.113281 14 5 12.886719 5 11.5 C 5 10.757813 5.328125 10.105469 5.84375 9.640625 C 5.949219 9.546875 6.011719 9.414063 6.011719 9.269531 L 6.011719 3.5 C 6.011719 2.671875 6.683594 2 7.511719 2 Z \"></path></g></svg>"
+          },
+          "factor": 1,
+          "linear": true,
+          "children": [
+            {
+              "id": "temperature.levels.0",
+              "name": "-Infinity",
+              "active": true,
+              "type": "level",
+              "index": 0,
+              "value": "-Infinity",
+              "color": "#f16059"
+            },
+            {
+              "id": "temperature.levels.1",
+              "name": "Min",
+              "active": true,
+              "type": "level",
+              "index": 1,
+              "value": 10,
+              "color": "#a2ce4b"
+            },
+            {
+              "id": "temperature.levels.2",
+              "name": "Mid",
+              "active": true,
+              "type": "level",
+              "index": 5,
+              "value": 30,
+              "color": "#ffae62"
+            },
+            {
+              "id": "temperature.levels.3",
+              "name": "Max",
+              "active": true,
+              "type": "level",
+              "index": 9,
+              "value": 50,
+              "color": "#f16059"
+            }
+          ]
+        },
+        {
+          "id": "humidity",
+          "name": "Влажность",
+          "active": true,
+          "type": "argument",
+          "source": "state",
+          "dataType": "number",
+          "unit": "percent",
+          "reference": "base/state/humidity",
+          "display": {
+            "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" x=\"0px\" y=\"0px\"\nviewBox=\"0 0 16 16\"\n><g id=\"surface1\"><path style=\" \" d=\"M 12 1.960938 L 11.582031 2.601563 C 11.582031 2.601563 11.199219 3.191406 10.8125 3.886719 C 10.621094 4.234375 10.425781 4.613281 10.273438 4.96875 C 10.121094 5.324219 10 5.640625 10 6 C 10 7.097656 10.902344 8 12 8 C 13.097656 8 14 7.097656 14 6 C 14 5.640625 13.878906 5.324219 13.726563 4.96875 C 13.574219 4.613281 13.378906 4.234375 13.1875 3.886719 C 12.800781 3.191406 12.417969 2.601563 12.417969 2.601563 Z M 4.125 2 L 3.707031 2.644531 C 3.707031 2.644531 3.324219 3.230469 2.9375 3.929688 C 2.746094 4.277344 2.550781 4.652344 2.398438 5.007813 C 2.246094 5.367188 2.125 5.683594 2.125 6.042969 C 2.125 7.140625 3.027344 8.042969 4.125 8.042969 C 5.222656 8.042969 6.125 7.140625 6.125 6.042969 C 6.125 5.683594 6.003906 5.367188 5.851563 5.007813 C 5.699219 4.652344 5.503906 4.277344 5.3125 3.929688 C 4.925781 3.230469 4.542969 2.644531 4.542969 2.644531 Z M 12 3.847656 C 12.128906 4.058594 12.15625 4.085938 12.3125 4.367188 C 12.496094 4.699219 12.675781 5.054688 12.804688 5.359375 C 12.933594 5.664063 13 5.945313 13 6 C 13 6.550781 12.550781 7 12 7 C 11.449219 7 11 6.550781 11 6 C 11 5.945313 11.066406 5.664063 11.195313 5.359375 C 11.324219 5.054688 11.503906 4.699219 11.6875 4.367188 C 11.84375 4.085938 11.871094 4.058594 12 3.847656 Z M 4.125 3.890625 C 4.253906 4.097656 4.28125 4.128906 4.4375 4.414063 C 4.621094 4.742188 4.800781 5.09375 4.929688 5.398438 C 5.058594 5.707031 5.125 5.988281 5.125 6.042969 C 5.125 6.59375 4.675781 7.042969 4.125 7.042969 C 3.574219 7.042969 3.125 6.59375 3.125 6.042969 C 3.125 5.988281 3.191406 5.707031 3.320313 5.398438 C 3.449219 5.09375 3.628906 4.742188 3.8125 4.414063 C 3.96875 4.128906 3.996094 4.097656 4.125 3.890625 Z M 8 7.960938 L 7.582031 8.601563 C 7.582031 8.601563 7.199219 9.191406 6.8125 9.886719 C 6.621094 10.234375 6.425781 10.613281 6.273438 10.96875 C 6.121094 11.324219 6 11.640625 6 12 C 6 13.097656 6.902344 14 8 14 C 9.097656 14 10 13.097656 10 12 C 10 11.640625 9.878906 11.324219 9.726563 10.96875 C 9.574219 10.613281 9.378906 10.234375 9.1875 9.886719 C 8.800781 9.191406 8.417969 8.601563 8.417969 8.601563 Z M 8 9.847656 C 8.128906 10.058594 8.15625 10.085938 8.3125 10.371094 C 8.496094 10.699219 8.675781 11.054688 8.804688 11.359375 C 8.933594 11.664063 9 11.945313 9 12 C 9 12.550781 8.550781 13 8 13 C 7.449219 13 7 12.550781 7 12 C 7 11.945313 7.066406 11.664063 7.195313 11.359375 C 7.324219 11.054688 7.503906 10.699219 7.6875 10.371094 C 7.84375 10.085938 7.871094 10.058594 8 9.847656 Z \"></path></g></svg>"
+          },
+          "factor": 1,
+          "children": [
+            {
+              "id": "humidity.levels.0",
+              "name": "-Infinity",
+              "active": true,
+              "type": "level",
+              "index": 0,
+              "value": "-Infinity",
+              "color": "#f16059"
+            },
+            {
+              "id": "humidity.levels.1",
+              "name": "Min",
+              "active": true,
+              "type": "level",
+              "index": 1,
+              "value": 0,
+              "color": "#3cc1d4"
+            },
+            {
+              "id": "humidity.levels.2",
+              "name": "Mid",
+              "active": true,
+              "type": "level",
+              "index": 5,
+              "value": 51,
+              "color": "#5d7ce5"
+            },
+            {
+              "id": "humidity.levels.3",
+              "name": "Max",
+              "active": true,
+              "type": "level",
+              "index": 9,
+              "value": 100,
+              "color": "#f16059"
+            }
+          ],
+          "linear": true
+        },
+        {
+          "id": "seed_hight",
+          "name": "Высота зерновой кучи",
+          "active": true,
+          "type": "argument",
+          "dataType": "number",
+          "factor": 1,
+          "linear": true,
+          "source": "state",
+          "unit": "length-centimeter",
+          "display": {
+            "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" x=\"0px\" y=\"0px\"\r\nviewBox=\"0 0 16 16\"\r\n><g id=\"surface1\"><path style=\"text-indent:0;text-align:start;line-height:normal;text-transform:none;block-progression:tb;-inkscape-font-specification:Bitstream Vera Sans\" d=\"M 15.8125 1 A 2.0021961 2.0021961 0 1 0 16 5 L 34 5 A 2.0002 2.0002 0 1 0 34 1 L 16 1 A 2.0002 2.0002 0 0 0 15.8125 1 z M 24.9375 5.96875 A 1.0001 1.0001 0 0 0 24.8125 6 A 1.0001 1.0001 0 0 0 24.1875 6.40625 L 20.1875 11.6875 A 1.015625 1.015625 0 0 0 21.8125 12.90625 L 24 10 L 24 40 L 21.8125 37.09375 A 1.0001 1.0001 0 0 0 20.84375 36.6875 A 1.0001 1.0001 0 0 0 20.1875 38.3125 L 24.1875 43.59375 A 1.0001 1.0001 0 0 0 25.8125 43.59375 L 29.8125 38.3125 A 1.015625 1.015625 0 0 0 28.1875 37.09375 L 26 40 L 26 10 L 28.1875 12.90625 A 1.015625 1.015625 0 0 0 29.8125 11.6875 L 25.8125 6.40625 A 1.0001 1.0001 0 0 0 24.9375 5.96875 z M 15 6 C 14.447715 6 14 6.4477153 14 7 C 14 7.5522847 14.447715 8 15 8 C 15.552285 8 16 7.5522847 16 7 C 16 6.4477153 15.552285 6 15 6 z M 35 6 C 34.447715 6 34 6.4477153 34 7 C 34 7.5522847 34.447715 8 35 8 C 35.552285 8 36 7.5522847 36 7 C 36 6.4477153 35.552285 6 35 6 z M 15 10 C 14.447715 10 14 10.447715 14 11 C 14 11.552285 14.447715 12 15 12 C 15.552285 12 16 11.552285 16 11 C 16 10.447715 15.552285 10 15 10 z M 35 10 C 34.447715 10 34 10.447715 34 11 C 34 11.552285 34.447715 12 35 12 C 35.552285 12 36 11.552285 36 11 C 36 10.447715 35.552285 10 35 10 z M 15 14 C 14.447715 14 14 14.447715 14 15 C 14 15.552285 14.447715 16 15 16 C 15.552285 16 16 15.552285 16 15 C 16 14.447715 15.552285 14 15 14 z M 35 14 C 34.447715 14 34 14.447715 34 15 C 34 15.552285 34.447715 16 35 16 C 35.552285 16 36 15.552285 36 15 C 36 14.447715 35.552285 14 35 14 z M 15 18 C 14.447715 18 14 18.447715 14 19 C 14 19.552285 14.447715 20 15 20 C 15.552285 20 16 19.552285 16 19 C 16 18.447715 15.552285 18 15 18 z M 35 18 C 34.447715 18 34 18.447715 34 19 C 34 19.552285 34.447715 20 35 20 C 35.552285 20 36 19.552285 36 19 C 36 18.447715 35.552285 18 35 18 z M 15 22 C 14.447715 22 14 22.447715 14 23 C 14 23.552285 14.447715 24 15 24 C 15.552285 24 16 23.552285 16 23 C 16 22.447715 15.552285 22 15 22 z M 35 22 C 34.447715 22 34 22.447715 34 23 C 34 23.552285 34.447715 24 35 24 C 35.552285 24 36 23.552285 36 23 C 36 22.447715 35.552285 22 35 22 z M 15 26 C 14.447715 26 14 26.447715 14 27 C 14 27.552285 14.447715 28 15 28 C 15.552285 28 16 27.552285 16 27 C 16 26.447715 15.552285 26 15 26 z M 35 26 C 34.447715 26 34 26.447715 34 27 C 34 27.552285 34.447715 28 35 28 C 35.552285 28 36 27.552285 36 27 C 36 26.447715 35.552285 26 35 26 z M 15 30 C 14.447715 30 14 30.447715 14 31 C 14 31.552285 14.447715 32 15 32 C 15.552285 32 16 31.552285 16 31 C 16 30.447715 15.552285 30 15 30 z M 35 30 C 34.447715 30 34 30.447715 34 31 C 34 31.552285 34.447715 32 35 32 C 35.552285 32 36 31.552285 36 31 C 36 30.447715 35.552285 30 35 30 z M 15 34 C 14.447715 34 14 34.447715 14 35 C 14 35.552285 14.447715 36 15 36 C 15.552285 36 16 35.552285 16 35 C 16 34.447715 15.552285 34 15 34 z M 35 34 C 34.447715 34 34 34.447715 34 35 C 34 35.552285 34.447715 36 35 36 C 35.552285 36 36 35.552285 36 35 C 36 34.447715 35.552285 34 35 34 z M 15 38 C 14.447715 38 14 38.447715 14 39 C 14 39.552285 14.447715 40 15 40 C 15.552285 40 16 39.552285 16 39 C 16 38.447715 15.552285 38 15 38 z M 35 38 C 34.447715 38 34 38.447715 34 39 C 34 39.552285 34.447715 40 35 40 C 35.552285 40 36 39.552285 36 39 C 36 38.447715 35.552285 38 35 38 z M 15 42 C 14.447715 42 14 42.447715 14 43 C 14 43.552285 14.447715 44 15 44 C 15.552285 44 16 43.552285 16 43 C 16 42.447715 15.552285 42 15 42 z M 35 42 C 34.447715 42 34 42.447715 34 43 C 34 43.552285 34.447715 44 35 44 C 35.552285 44 36 43.552285 36 43 C 36 42.447715 35.552285 42 35 42 z M 15.8125 45 A 2.0021961 2.0021961 0 1 0 16 49 L 34 49 A 2.0002 2.0002 0 1 0 34 45 L 16 45 A 2.0002 2.0002 0 0 0 15.8125 45 z\"/>\r\n</svg>"
+          },
+          "children": [
+            {
+              "id": "seed_hight.levels.0",
+              "name": "-Infinity",
+              "active": true,
+              "type": "level",
+              "index": 0,
+              "value": "-Infinity",
+              "color": "#a2ce4b"
+            },
+            {
+              "id": "seed_hight.levels.1",
+              "name": "Min",
+              "active": true,
+              "type": "level",
+              "index": 1,
+              "value": 0,
+              "color": "#a2ce4b"
+            },
+            {
+              "id": "seed_hight.levels.2",
+              "name": "Mid",
+              "active": true,
+              "type": "level",
+              "index": 5,
+              "value": 150,
+              "color": "#ffae62"
+            },
+            {
+              "id": "seed_hight.levels.3",
+              "name": "Max",
+              "active": true,
+              "type": "level",
+              "index": 9,
+              "value": 300,
+              "color": "#f16059"
+            }
+          ],
+          "reference": "base/state/seed_hight"
+        },
+        {
+          "id": "movement",
+          "name": "Наличие движения",
+          "active": true,
+          "type": "argument",
+          "dataType": "boolean",
+          "display": {
+            "svg": "<svg version=\"1.1\" id=\"Capa_1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" x=\"0px\" y=\"0px\"\r\n\t width=\"511.626px\" height=\"511.626px\" viewBox=\"0 0 511.626 511.626\" style=\"enable-background:new 0 0 511.626 511.626;\"\r\n\t xml:space=\"preserve\">\r\n\t<path d=\"M506.199,242.968l-73.09-73.089c-3.614-3.617-7.898-5.424-12.848-5.424c-4.948,0-9.229,1.807-12.847,5.424\r\n\t\tc-3.613,3.619-5.424,7.902-5.424,12.85v36.547H292.355V109.641h36.549c4.948,0,9.232-1.809,12.847-5.424\r\n\t\tc3.614-3.617,5.421-7.896,5.421-12.847c0-4.952-1.807-9.235-5.421-12.851L268.66,5.429c-3.613-3.616-7.895-5.424-12.847-5.424\r\n\t\tc-4.952,0-9.232,1.809-12.85,5.424l-73.088,73.09c-3.618,3.619-5.424,7.902-5.424,12.851c0,4.946,1.807,9.229,5.424,12.847\r\n\t\tc3.619,3.615,7.898,5.424,12.85,5.424h36.545v109.636H109.636v-36.547c0-4.952-1.809-9.234-5.426-12.85\r\n\t\tc-3.619-3.617-7.902-5.424-12.85-5.424c-4.947,0-9.23,1.807-12.847,5.424L5.424,242.968C1.809,246.585,0,250.866,0,255.815\r\n\t\ts1.809,9.233,5.424,12.847l73.089,73.087c3.617,3.613,7.897,5.431,12.847,5.431c4.952,0,9.234-1.817,12.85-5.431\r\n\t\tc3.617-3.61,5.426-7.898,5.426-12.847v-36.549H219.27v109.636h-36.542c-4.952,0-9.235,1.811-12.851,5.424\r\n\t\tc-3.617,3.617-5.424,7.898-5.424,12.847s1.807,9.233,5.424,12.854l73.089,73.084c3.621,3.614,7.902,5.424,12.851,5.424\r\n\t\tc4.948,0,9.236-1.81,12.847-5.424l73.087-73.084c3.621-3.62,5.428-7.905,5.428-12.854s-1.807-9.229-5.428-12.847\r\n\t\tc-3.614-3.613-7.898-5.424-12.847-5.424h-36.542V292.356h109.633v36.553c0,4.948,1.807,9.232,5.42,12.847\r\n\t\tc3.621,3.613,7.905,5.428,12.854,5.428c4.944,0,9.226-1.814,12.847-5.428l73.087-73.091c3.617-3.617,5.424-7.901,5.424-12.85\r\n\t\tS509.82,246.585,506.199,242.968z\"/>\r\n</svg>"
+          },
+          "factor": 1,
+          "linear": true,
+          "source": "state",
+          "unit": null,
+          "reference": "base/state/movement",
+          "children": [
+            {
+              "id": "movement.levels.0",
+              "name": "Нет",
+              "active": true,
+              "type": "level",
+              "index": 0,
+              "value": false,
+              "color": "#f16059"
+            },
+            {
+              "id": "movement.levels.1",
+              "name": "Да",
+              "active": true,
+              "type": "level",
+              "index": 1,
+              "value": true,
+              "color": "#a2ce4b"
+            }
+          ]
+        },
+        {
+          "id": "seed_humidity",
+          "name": "Влажность биткоин-зерна",
+          "active": true,
+          "type": "argument",
+          "dataType": "number",
+          "factor": 1,
+          "linear": true,
+          "source": "state",
+          "unit": "percent",
+          "children": [
+            {
+              "id": "seed_humidity.levels.0",
+              "name": "-Infinity",
+              "active": true,
+              "type": "level",
+              "index": 0,
+              "value": "-Infinity",
+              "color": "#a2ce4b"
+            },
+            {
+              "id": "seed_humidity.levels.1",
+              "name": "Min",
+              "active": true,
+              "type": "level",
+              "index": 1,
+              "value": 0,
+              "color": "#a2ce4b"
+            },
+            {
+              "id": "seed_humidity.levels.2",
+              "name": "Mid",
+              "active": true,
+              "type": "level",
+              "index": 5,
+              "value": 50,
+              "color": "#ffae62"
+            },
+            {
+              "id": "seed_humidity.levels.3",
+              "name": "Max",
+              "active": true,
+              "type": "level",
+              "index": 9,
+              "value": 100,
+              "color": "#f16059"
+            }
+          ]
+        },
+        {
+          "id": "speed",
+          "name": "Скорость",
+          "active": true,
+          "type": "argument",
+          "dataType": "number",
+          "factor": 1,
+          "linear": true,
+          "source": "state",
+          "unit": "speed-kilometer-per-hour",
+          "reference": "base/state/speed",
+          "children": [
+            {
+              "id": "speed.levels.0",
+              "name": "-Infinity",
+              "active": true,
+              "type": "level",
+              "index": 0,
+              "value": "-Infinity",
+              "color": "#a2ce4b"
+            },
+            {
+              "id": "speed.levels.1",
+              "name": "Min",
+              "active": true,
+              "type": "level",
+              "index": 1,
+              "value": 0,
+              "color": "#a2ce4b"
+            },
+            {
+              "id": "speed.levels.2",
+              "name": "Mid",
+              "active": true,
+              "type": "level",
+              "index": 5,
+              "value": 60,
+              "color": "#ffae62"
+            },
+            {
+              "id": "speed.levels.3",
+              "name": "Max",
+              "active": true,
+              "type": "level",
+              "index": 9,
+              "value": 80,
+              "color": "#f16059"
+            }
+          ]
+        },
+        {
+          "id": "pos",
+          "name": "Координаты",
+          "active": true,
+          "type": "argument",
+          "dataType": "object",
+          "factor": 1,
+          "linear": true,
+          "source": "state",
+          "unit": null,
+          "children": [
+            {
+              "id": "lon",
+              "name": "Долгота",
+              "active": true,
+              "type": "argument",
+              "dataType": "number",
+              "factor": 1,
+              "linear": true,
+              "reference": "pos.lon",
+              "source": "state",
+              "unit": "angle-degree"
+            },
+            {
+              "id": "lat",
+              "name": "Широта",
+              "active": true,
+              "type": "argument",
+              "source": "state",
+              "dataType": "number",
+              "linear": true,
+              "factor": 1,
+              "reference": "pos.lat",
+              "unit": "angle-degree",
+              "children": []
+            }
+          ],
+          "reference": "base/state/pos"
+        },
+        {
+          "id": "seed_status",
+          "name": "Состояние кузова",
+          "active": true,
+          "type": "argument",
+          "source": "state",
+          "dataType": "boolean",
+          "linear": true,
+          "factor": 1,
+          "unit": null,
+          "children": [
+            {
+              "id": "status-l6k21.levels.0",
+              "name": "Разгружен",
+              "active": true,
+              "type": "level",
+              "index": 0,
+              "value": false,
+              "color": "#f16059",
+              "children": [],
+              "description": "Разгружен"
+            },
+            {
+              "id": "status-l6k21.levels.1",
+              "name": "Загружен",
+              "active": true,
+              "type": "level",
+              "index": 1,
+              "value": true,
+              "color": "#a2ce4b",
+              "children": [],
+              "description": "Загружен"
+            }
+          ],
+          "reference": "base/state/seed_status"
+        },
+        {
+          "id": "status_car",
+          "name": "Статус",
+          "active": true,
+          "type": "argument",
+          "source": "state",
+          "dataType": "boolean",
+          "linear": true,
+          "factor": 1,
+          "unit": null,
+          "children": [
+            {
+              "id": "status-l6k21-pbskm.levels.0",
+              "name": "Прибыл",
+              "active": true,
+              "type": "level",
+              "index": 0,
+              "value": false,
+              "color": "#3cc1d4",
+              "children": [],
+              "description": "Прибыл"
+            },
+            {
+              "id": "status-l6k21-pbskm.levels.1",
+              "name": "В пути",
+              "active": true,
+              "type": "level",
+              "index": 1,
+              "value": true,
+              "color": "#a2ce4b",
+              "children": [],
+              "description": "В пути"
+            }
+          ],
+          "reference": "base/state/status"
+        },
+        {
+          "id": "mqtt-last",
+          "name": "Last MQTT Publish",
+          "active": true,
+          "type": "subsystem",
+          "children": [
+            {
+              "id": "topic",
+              "name": "Topic",
+              "active": true,
+              "type": "argument",
+              "source": "state",
+              "dataType": "string",
+              "reference": "topic"
+            },
+            {
+              "id": "payload",
+              "name": "Payload",
+              "active": true,
+              "type": "argument",
+              "source": "state",
+              "dataType": "string",
+              "reference": "payload"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cmds",
+      "name": "Commands",
+      "active": true,
+      "type": "subsystem",
+      "children": [
+        {
+          "id": "led-on",
+          "name": "Включить LED",
+          "active": true,
+          "type": "action",
+          "service": "ric-gate",
+          "command": "publish",
+          "params": {
+            "topic": "base/relay/led1",
+            "payload": "1",
+            "wait": "base/relay/led1"
+          },
+          "description": "x"
+        },
+        {
+          "id": "led-off",
+          "name": "Выключить LED",
+          "active": true,
+          "type": "action",
+          "service": "ric-gate",
+          "command": "publish",
+          "params": {
+            "topic": "base/relay/led1",
+            "payload": "0",
+            "wait": "base/relay/led1"
+          }
+        },
+        {
+          "id": "ask_temp_hum",
+          "name": "Запросить температуру и влажность",
+          "active": true,
+          "type": "action",
+          "dataType": "number",
+          "factor": 1,
+          "linear": true,
+          "source": "state",
+          "command": "publish",
+          "service": "ric-gate",
+          "params": {
+            "payload": "1",
+            "topic": "base/relay/ask_temp",
+            "wait": "base/state/temperature"
+          }
+        }
+      ],
+      "description": "Команды"
+    }
+  ],
+  "base": "mqtt",
+  "disabled": [],
+  "removed": []
+}

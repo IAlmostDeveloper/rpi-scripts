@@ -1,0 +1,4 @@
+https://events.webinar.ru/11557513/3215651/record-new/3269957
+pip install Adafruit_DHT
+pip install paho_mqtt
+pip install gpiozero
