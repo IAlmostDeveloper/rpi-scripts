@@ -1,0 +1,8 @@
+#!/usr/bin/python3
+
+import adafruit_dht
+import board
+dht_device = adafruit_dht.DHT11(board.D19)
+temperature = dht_device.temperature
+humidity = dht_device.humidity
+print(temperature)
